@@ -8,12 +8,13 @@ const AddLabel = ({ onLabelAdded }) => {
 
   const handleAddLabel = async () => {
     try {
-      // Aqui você pode fazer uma requisição para o Backend para adicionar a despesa
-      // Vou deixar um exemplo básico utilizando axios
-      await axios.post('URL_DO_SEU_BACKEND', { name, tag, color });
-      // Após adicionar a despesa, você pode chamar a função onLabelAdded para atualizar a tabela ou qualquer outra ação necessária
+      await axios.post('http://localhost:8000/api/expenses/', { name, tag, color }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      
+      });
       onLabelAdded();
-      // Limpa os campos após adicionar a despesa
       setName('');
       setTag('');
       setColor('');
