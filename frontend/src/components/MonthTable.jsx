@@ -12,23 +12,16 @@ const MonthTable = () => {
   const fetchExpenses = async () => {
      try {
        const response = await axios.get('http://localhost:8000/api/expenses/');
-       const expensesByMonth = {};
-       // Supondo que você queira exibir todas as despesas em todos os meses
-       months.forEach(month => {
-         expensesByMonth[month] = [];
-       });
+       const expensesByName = {};
        response.data.forEach(expense => {
-         // Adiciona cada despesa a todos os meses
-         months.forEach(month => {
-           expensesByMonth[month].push(expense.name);
-         });
+         // Agrupa as despesas por nome
+         expensesByName[expense.name] = expense;
        });
-       setExpenses(expensesByMonth);
+       setExpenses(expensesByName);
      } catch (error) {
        console.error('Erro ao buscar despesas:', error);
      }
   };
- 
   fetchExpenses();
  }, []);
  
@@ -42,22 +35,27 @@ const MonthTable = () => {
         <thead>
           <tr>
             <th>Mês</th>
-            <th>Despesas</th>
+            {Object.keys(expenses).map(expenseName => (
+              <th key={expenseName}>{expenseName}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
           {months.map((month, index) => (
             <tr key={index}>
               <td>{month}</td>
-              <td>
-                {expenses[month]}
-              </td>
+              {Object.keys(expenses).map(expenseName => (
+                <td key={expenseName}>
+                 {/* Aqui você pode adicionar a lógica para exibir o valor da despesa para o mês específico */}
+                 {/* Por exemplo, se cada despesa tiver um valor específico para cada mês, você pode acessá-lo aqui */}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
- );
+);
 };
 
 export default MonthTable;
