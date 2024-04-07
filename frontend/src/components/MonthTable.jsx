@@ -11,7 +11,7 @@ const MonthTable = () => {
  useEffect(() => {
   const fetchExpenses = async () => {
      try {
-       const response = await axios.get('http://localhost:8000/api/expenses/');
+       const response = await axios.get('http://localhost:5000/api/expenses/');
        const expensesByName = {};
        response.data.forEach(expense => {
          // Agrupa as despesas por nome

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const AddLabel = ({ onLabelAdded }) => {
   const [name, setName] = useState('');
   const [tag, setTag] = useState('');
@@ -8,7 +9,7 @@ const AddLabel = ({ onLabelAdded }) => {
 
   const handleAddLabel = async () => {
     try {
-      await axios.post('http://localhost:8000/api/expenses/', { name, tag, color }, {
+      await axios.post('http://localhost:5000/api/expenses/', { name, tag, color }, {
         headers: {
           'Content-Type': 'application/json',
         },
